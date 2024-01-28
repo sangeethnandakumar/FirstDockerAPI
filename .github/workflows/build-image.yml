@@ -7,20 +7,20 @@ on:
       - master
 
 env:
+  # Docker Config  
+  IMAGE_NAME: 'first-docker-api'
+  SERVER_PORT: 5001
+  CONTAINER_PORT: 8080  
+  
   # Dotnet Config
   DOTNET_VERSION: '8.0.101'
-  PROJECT_PATH: './FirstDockerAPI/FirstDockerAPI.csproj'
-  PUBLISH_DIR: './publish/'
+  PROJECT_ROOT: './FirstDockerAPI'
+  PROJECT_PATH: ${{ env.CONTAINER_PORT }} '/FirstDockerAPI.csproj'
   
-  # Docker Config
-  DOCKERFILE_PATH: './FirstDockerAPI'
-  IMAGE_NAME: 'first-docker-api'
-  
-  # Linux Config
+  # Linux Config  
+  SERVER_HOST: 'twileloop.com'
+  SERVER_USERNAME: 'root'  
   SERVER_SSH: ${{ secrets.DEPLOY_KEY }}
-  SERVER_HOST: '4ih1.l.time4vps.cloud'
-  SERVER_USERNAME: 'root'
-  CONTAINER_PORT: 8080
 
 jobs:
   build:
@@ -40,10 +40,10 @@ jobs:
         run: dotnet build ${{ env.PROJECT_PATH }} --configuration Release --no-restore
 
       - name: Publish
-        run: dotnet publish ${{ env.PROJECT_PATH }} --configuration Release --no-build --output ${{ env.PUBLISH_DIR }}
+        run: dotnet publish ${{ env.PROJECT_PATH }} --configuration Release --no-build --output './publish/'
 
       - name: Build Docker Image
-        run: docker build -t ${{ env.IMAGE_NAME }} ${{ env.DOCKERFILE_PATH }}
+        run: docker build -t ${{ env.IMAGE_NAME }} ${{ env.PROJECT_ROOT }}
 
       - name: Save Docker Image
         run: docker save ${{ env.IMAGE_NAME }} | gzip > ${{ env.IMAGE_NAME }}.tar.gz
@@ -67,4 +67,4 @@ jobs:
             docker load < /tmp/${{ env.IMAGE_NAME }}.tar.gz
             docker stop ${{ env.IMAGE_NAME }} || true
             docker rm ${{ env.IMAGE_NAME }} || true
-            docker run -d -p ${{ env.CONTAINER_PORT }}:${{ env.CONTAINER_PORT }} --name ${{ env.IMAGE_NAME }} ${{ env.IMAGE_NAME }}
+            docker run -d -p ${{ env.SERVER_PORT }}:${{ env.CONTAINER_PORT }} --name ${{ env.IMAGE_NAME }} ${{ env.IMAGE_NAME }}

@@ -10,7 +10,7 @@ on:
 env:
   # Docker Config  
   IMAGE_NAME           : 'first-docker-api'
-  SERVER_PORT          : 5002
+  SERVER_PORT          : 5001
   CONTAINER_PORT       : 8080  
   
   # Dotnet Config

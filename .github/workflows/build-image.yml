@@ -13,7 +13,7 @@ env:
   PUBLISH_DIR: './publish/'
   
   # Docker Config
-  DOCKERFILE_PATH: '.'
+  DOCKERFILE_PATH: './FirstDockerAPI'
   IMAGE_NAME: 'first-docker-api'
   
   # Linux Config

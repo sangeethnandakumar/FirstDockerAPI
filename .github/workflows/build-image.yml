@@ -9,14 +9,14 @@ on:
 
 env:
   # Docker Config  
-  IMAGE_NAME: 'first-docker-api'
-  SERVER_PORT: 5002
-  CONTAINER_PORT: 8080  
+  IMAGE_NAME           : 'first-docker-api'
+  SERVER_PORT          : 5002
+  CONTAINER_PORT       : 8080  
   
   # Dotnet Config
-  DOTNET_VERSION: '8.0.101'
-  DOCKER_FILE:  './FirstDockerAPI/Dockerfile'
-  PROJECT_PATH: './FirstDockerAPI/FirstDockerAPI.csproj'
+  DOTNET_VERSION       : '8.0.101'
+  DOCKER_FILE_LOCATION : './FirstDockerAPI'
+  PROJECT_PATH         : './FirstDockerAPI/FirstDockerAPI.csproj'
   
   # Linux Config  
   SERVER_HOST: 'twileloop.com'

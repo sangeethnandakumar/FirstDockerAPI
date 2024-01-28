@@ -9,7 +9,7 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["FirstDockerAPI/FirstDockerAPI.csproj", "FirstDockerAPI/"]
+COPY ["FirstDockerAPI/FirstDockerAPI.csproj", "./"]
 RUN dotnet restore "./FirstDockerAPI/FirstDockerAPI.csproj"
 COPY . .
 WORKDIR "/src/FirstDockerAPI"

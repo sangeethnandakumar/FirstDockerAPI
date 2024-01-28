@@ -10,7 +10,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["FirstDockerAPI.csproj", "./"]
-RUN dotnet restore "./FirstDockerAPI/FirstDockerAPI.csproj"
+RUN dotnet restore "./FirstDockerAPI.csproj"
 COPY . .
 WORKDIR "/src/FirstDockerAPI"
 RUN dotnet build "./FirstDockerAPI.csproj" -c $BUILD_CONFIGURATION -o /app/build

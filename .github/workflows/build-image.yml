@@ -14,7 +14,7 @@ env:
   
   # Docker Config
   DOCKERFILE_PATH: '.'
-  IMAGE_NAME: 'FirstDockerAPI'
+  IMAGE_NAME: 'first-docker-api'
   
   # Linux Config
   SERVER_SSH: ${{ secrets.DEPLOY_KEY }}

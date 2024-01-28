@@ -9,18 +9,21 @@ on:
 env:
   # Docker Config  
   IMAGE_NAME: 'first-docker-api'
-  SERVER_PORT: 5001
+  SERVER_PORT: 5002
   CONTAINER_PORT: 8080  
   
   # Dotnet Config
   DOTNET_VERSION: '8.0.101'
   PROJECT_ROOT: './FirstDockerAPI'
-  PROJECT_PATH: ${{ env.CONTAINER_PORT }} '/FirstDockerAPI.csproj'
+  PROJECT_FILE: '/FirstDockerAPI.csproj'  
   
   # Linux Config  
   SERVER_HOST: 'twileloop.com'
   SERVER_USERNAME: 'root'  
   SERVER_SSH: ${{ secrets.DEPLOY_KEY }}
+  
+  # Derived
+  PROJECT_PATH: ${{ env.CONTAINER_PORT }}${{ env.PROJECT_FILE }}
 
 jobs:
   build:

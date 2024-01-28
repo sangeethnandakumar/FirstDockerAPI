@@ -8,7 +8,7 @@ on:
 
 env:
   # Dotnet Config
-  DOTNET_VERSION: '8.0.0'
+  DOTNET_VERSION: '8.0.101'
   PROJECT_PATH: './FirstDockerAPI/FirstDockerAPI.csproj'
   PUBLISH_DIR: './publish/'
   

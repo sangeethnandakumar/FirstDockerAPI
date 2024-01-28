@@ -65,4 +65,6 @@ jobs:
           key: ${{ env.SERVER_SSH }}
           script: |
             docker load < /tmp/${{ env.IMAGE_NAME }}.tar.gz
-            docker run -d -p ${{ env.CONTAINER_PORT }}:${{ env.CONTAINER_PORT }} ${{ env.IMAGE_NAME }}
+            docker stop ${{ env.IMAGE_NAME }} || true
+            docker rm ${{ env.IMAGE_NAME }} || true
+            docker run -d -p ${{ env.CONTAINER_PORT }}:${{ env.CONTAINER_PORT }} --name ${{ env.IMAGE_NAME }} ${{ env.IMAGE_NAME }}

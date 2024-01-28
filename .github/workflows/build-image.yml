@@ -1,3 +1,4 @@
+
 name: Build & Deploy Docker Container
 
 on:
@@ -14,16 +15,13 @@ env:
   
   # Dotnet Config
   DOTNET_VERSION: '8.0.101'
-  PROJECT_ROOT: './FirstDockerAPI'
-  PROJECT_FILE: '/FirstDockerAPI.csproj'  
+  DOCKER_FILE:  './FirstDockerAPI/Dockerfile'
+  PROJECT_PATH: './FirstDockerAPI/FirstDockerAPI.csproj'
   
   # Linux Config  
   SERVER_HOST: 'twileloop.com'
   SERVER_USERNAME: 'root'  
   SERVER_SSH: ${{ secrets.DEPLOY_KEY }}
-  
-  # Derived
-  PROJECT_PATH: ${{ env.CONTAINER_PORT }}${{ env.PROJECT_FILE }}
 
 jobs:
   build:
@@ -46,7 +44,7 @@ jobs:
         run: dotnet publish ${{ env.PROJECT_PATH }} --configuration Release --no-build --output './publish/'
 
       - name: Build Docker Image
-        run: docker build -t ${{ env.IMAGE_NAME }} ${{ env.PROJECT_ROOT }}
+        run: docker build -t ${{ env.IMAGE_NAME }} ${{ env.DOCKER_FILE }}
 
       - name: Save Docker Image
         run: docker save ${{ env.IMAGE_NAME }} | gzip > ${{ env.IMAGE_NAME }}.tar.gz
